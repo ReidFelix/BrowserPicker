@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Main theme for Settings and any non-transparent UI -->
+    <style name="Theme.BrowserPicker" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <!--
+        Transparent theme for the BrowserInterceptorActivity.
+        The activity acts as a transparent jump page — no visible background,
+        no window animation flicker. The Compose dialog provides all the UI.
+    -->
+    <style name="Theme.BrowserPicker.Transparent" parent="Theme.BrowserPicker">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+</resources>

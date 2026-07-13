@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Browser Picker</string>
+    <string name="choose_browser">选择浏览器</string>
+    <string name="no_browsers">未检测到已安装的浏览器</string>
+    <string name="no_browsers_message">此设备上未找到其他浏览器。</string>
+    <string name="open_failed">无法打开浏览器</string>
+    <string name="installed_browsers">已安装的浏览器</string>
+    <string name="refresh">刷新</string>
+    <string name="app_description">将本应用设置为默认浏览器后，每次点击链接都会弹出选择界面，让你自由选择使用哪个浏览器打开。</string>
+</resources>

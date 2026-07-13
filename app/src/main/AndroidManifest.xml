@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Required on Android 11+ (API 30+) to discover other browsers -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="http" />
+        </intent>
+    </queries>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.BrowserPicker"
+        tools:targetApi="34">
+
+        <!--
+            BrowserInterceptorActivity serves double duty:
+
+            1. When opened via a URL intent (ACTION_VIEW on http/https):
+               Acts as a transparent jump page. The transparent theme gives the
+               appearance of a system dialog overlaid on the calling app. The
+               user picks a browser and the URL is forwarded.
+
+            2. When opened from the launcher (ACTION_MAIN):
+               Shows a settings/home screen where the user can configure
+               preferences and clear remembered browser choices.
+
+            Launch mode: singleTask ensures a single instance. When the activity
+            is already alive and a new URL comes in, onNewIntent() is called
+            instead of onCreate(), which updates the UI with the new URL.
+
+            excludeFromRecents is NOT set here because we need the launcher
+            activity to appear in recents. We handle "no leftover task" by
+            finishing the activity immediately after forwarding the URL, and
+            the transparent theme prevents visual intrusion.
+        -->
+        <activity
+            android:name=".BrowserInterceptorActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:theme="@style/Theme.BrowserPicker.Transparent">
+
+            <!-- Launcher entry: lets user open the app to configure settings -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- Browser registration: these intent filters make Android
+                 recognize this app as a browser capable of handling web URLs.
+                 android:autoVerify="false" because we do NOT want to claim
+                 ownership of any links. -->
+            <intent-filter
+                android:autoVerify="false"
+                android:priority="1">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+            </intent-filter>
+
+            <intent-filter
+                android:autoVerify="false"
+                android:priority="1">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+            </intent-filter>
+        </activity>
+
+    </application>
+</manifest>
