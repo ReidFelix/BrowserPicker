@@ -18,7 +18,7 @@
 
 ## 🚀 使用方法
 
-1. 下载 [BrowserPicker-v1.0.apk](./BrowserPicker-v1.0.apk) 安装到手机
+1. 下载 [BrowserPicker-v1.0.apk](https://github.com/ReidFelix/BrowserPicker/releases/download/v1.0/BrowserPicker-v1.0.apk) 安装到手机
 2. 进入 `设置 → 应用 → 默认应用 → 浏览器`，选择 **Browser Picker**
 3. 从任何应用点击链接，弹出浏览器选择界面
 
