@@ -2,7 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Required on Android 11+ (API 30+) to discover other browsers -->
+    <!--
+        Required on Android 11+ (API 30+) to be able to see the other browsers
+        that can open a web URL. Without it queryIntentActivities() only ever
+        returns our own package.
+
+        Do NOT add <category> elements here. The queries entry is matched
+        against the filters of every installed app; listing a category makes
+        the visibility filter stricter, and a stricter filter can end up
+        excluding the very browsers we are looking for (symptom: the picker
+        reports "no other browser found" on devices that clearly have some).
+        The action + scheme combination alone matches every app that can open
+        a web link, which is exactly what we want.
+    -->
     <queries>
         <intent>
             <action android:name="android.intent.action.VIEW" />
@@ -31,12 +43,13 @@
                user picks a browser and the URL is forwarded.
 
             2. When opened from the launcher (ACTION_MAIN):
-               Shows a settings/home screen where the user can configure
-               preferences and clear remembered browser choices.
+               Shows the list of installed browsers plus a shortcut to the
+               system screen where this app can become the default browser.
 
             Launch mode: singleTask ensures a single instance. When the activity
             is already alive and a new URL comes in, onNewIntent() is called
-            instead of onCreate(), which updates the UI with the new URL.
+            instead of onCreate(), and the pending URL is published through a
+            StateFlow so the dialog can simply be recomposed.
 
             excludeFromRecents is NOT set here because we need the launcher
             activity to appear in recents. We handle "no leftover task" by
@@ -50,7 +63,8 @@
             android:taskAffinity=""
             android:theme="@style/Theme.BrowserPicker.Transparent">
 
-            <!-- Launcher entry: lets user open the app to configure settings -->
+            <!-- Launcher entry: lets the user open the app to pick a browser
+                 and to set the app as the system default browser. -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Browser Picker</string>
+
+    <!-- Browser picker dialog -->
     <string name="choose_browser">选择浏览器</string>
+    <string name="copy">复制</string>
+    <string name="copied">已复制</string>
+    <string name="clip_label">链接</string>
+
+    <!-- Browser list -->
     <string name="no_browsers">未检测到已安装的浏览器</string>
     <string name="no_browsers_message">此设备上未找到其他浏览器。</string>
-    <string name="open_failed">无法打开浏览器</string>
+    <string name="no_browsers_debug">系统共返回 %1\ 个可打开链接的应用（均已排除）。</string>
     <string name="installed_browsers">已安装的浏览器</string>
     <string name="refresh">刷新</string>
+
+    <!-- Errors -->
+    <string name="open_failed">无法打开浏览器</string>
+    <string name="open_failed_unsupported">该浏览器无法打开此链接</string>
+    <string name="open_settings_failed">无法打开系统设置</string>
+
+    <!-- Default browser -->
+    <string name="set_as_default_browser">设为默认浏览器</string>
+    <string name="is_default_browser">已是默认浏览器</string>
     <string name="app_description">将本应用设置为默认浏览器后，每次点击链接都会弹出选择界面，让你自由选择使用哪个浏览器打开。</string>
 </resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <!--
+        AAPT2 only accepts an <adaptive-icon> inside a `-v26` resource folder,
+        even though minSdk is already 26 — without the qualifier the resource
+        is dropped at link time ("resource mipmap/ic_launcher not found").
+        Lint's ObsoleteSdkInt check does not know about that AAPT2 rule, so the
+        warning is suppressed for this folder only.
+    -->
+    <issue id="ObsoleteSdkInt">
+        <ignore path="src/main/res/mipmap-anydpi-v26" />
+    </issue>
+</lint>

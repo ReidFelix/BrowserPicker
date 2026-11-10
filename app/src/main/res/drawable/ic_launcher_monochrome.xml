@@ -1,0 +1,29 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Themed (monochrome) variant: only the alpha shape matters, the launcher
+         tints it with the system accent colour. -->
+    <!-- Globe outline -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M54,54m-31,0a31,31 0,1 1,62 0a31,31 0,1 1,-62 0"
+        android:strokeWidth="5"
+        android:strokeColor="#000000" />
+    <!-- Arrow -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M36,54L60,54"
+        android:strokeWidth="6"
+        android:strokeColor="#000000"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:fillColor="#000000"
+        android:pathData="M52,45L61,54L52,63"
+        android:strokeWidth="6"
+        android:strokeColor="#000000"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+</vector>

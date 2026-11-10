@@ -5,15 +5,23 @@
 
     <!--
         Transparent theme for the BrowserInterceptorActivity.
-        The activity acts as a transparent jump page — no visible background,
-        no window animation flicker. The Compose dialog provides all the UI.
+        The activity acts as a transparent jump page — no visible background.
+        The Compose dialog provides all the UI.
+
+        Notes:
+        * backgroundDimEnabled is false on purpose. The dim is drawn *inside* the
+          Compose dialog window (so it can fade out together with the card).
+          A system dim here would double up with it.
+        * windowAnimationStyle stays @null. The dialog window is torn down with
+          the Activity instead of being dismissed, so window animations would
+          never play anyway — the fade is driven from Compose instead.
     -->
     <style name="Theme.BrowserPicker.Transparent" parent="Theme.BrowserPicker">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 </resources>
