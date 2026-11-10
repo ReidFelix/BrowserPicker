@@ -3,6 +3,7 @@ name: Android CI
 on:
   push:
     branches: [ master, main ]
+    tags: [ 'v*' ]
   pull_request:
   workflow_dispatch:
 
@@ -25,8 +26,13 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      # v3 is broken: it still tries to install the "tools" package, which has
+      # been removed from the SDK repository ("Failed to find package 'tools'").
+      # v4.0.2+ fixed that.
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
+        with:
+          packages: 'platforms;android-34 build-tools;34.0.0'
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v3
@@ -39,7 +45,3 @@ jobs:
 
       - name: Build debug APK
         run: ./gradlew assembleDebug
-
-      # The release variant needs a signing key, which is deliberately kept out
-      # of the repository. Release APKs are built locally with
-      # `scripts/create-release-keystore.ps1`.
