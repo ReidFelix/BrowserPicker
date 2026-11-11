@@ -12,6 +12,12 @@ on:
   push:
     tags: [ 'v*' ]
   workflow_dispatch:
+    inputs:
+      tag:
+        description: '要发布的标签（例如 v2.2）。留空则用当前 ref'
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: write
@@ -67,8 +73,9 @@ jobs:
       - name: Create release and upload APK
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REQUESTED_TAG: ${{ inputs.tag }}
         run: |
-          TAG="${GITHUB_REF_NAME}"
+          TAG="${REQUESTED_TAG:-${GITHUB_REF_NAME}}"
           cp app/build/outputs/apk/release/app-release.apk "BrowserPicker-$TAG.apk"
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" "BrowserPicker-$TAG.apk" --clobber
